@@ -1,3 +1,4 @@
+import AreaChart from "@/components/AreaChart";
 import Search from "@/components/Search";
 import { SignOut } from "@/components/sign-out";
 import { getI18n } from "@/locales/server";
@@ -19,7 +20,7 @@ export default async function Page() {
       <div className="flex flex-col items-center justify-center gap-4">
         <Search/>
        
-
+        <AreaChart/>  
       
       </div>
     </div>
