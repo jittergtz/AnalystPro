@@ -3,6 +3,8 @@ import { CopyText } from "@/components/copy-text";
 import { Footer } from "@/components/footer";
 import Hero from "@/components/hero";
 import SectionOne from "@/components/section-1";
+import Pricing from "@/components/section-pricing";
+import SectionWhite from "@/components/section-white";
 import {
   Tooltip,
   TooltipContent,
@@ -16,6 +18,8 @@ export default function Page() {
       <Hero/>
       <Footer />
       <SectionOne/>
+      <SectionWhite/>
+      <Pricing/>
     </div>
   );
 }
