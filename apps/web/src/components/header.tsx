@@ -14,7 +14,7 @@ import { SubscribeForm } from "./subscribe-form";
 
 export function Header() {
   return (
-    <header className="absolute top-0 w-full flex items-center justify-between p-4 z-10">
+    <header className="fixed top-0 w-full flex items-center justify-between p-4 z-10">
       <span className="hidden md:block text-md font-medium text-zinc-200">Analyst Pro</span>
 
      
@@ -24,7 +24,7 @@ export function Header() {
           <li>
             <Link
               href="https://github.com/midday-ai/v1"
-              className="text-sm border border-zinc-300 px-4 py-2  text-secondary rounded-full font-medium"
+              className="text-sm border border-zinc-300 bg-neutral-900 px-4 py-2  text-secondary rounded-full font-medium"
             >
              Sign in
             </Link>

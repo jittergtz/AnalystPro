@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={cn(
           `${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased bg-[#171717]",
+          "antialiased dark:bg-[#171717]  bg-[#d6d6d6]",
         )}
       >
         <ThemeProvider

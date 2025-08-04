@@ -1,17 +1,20 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react'
-import { ChevronDown, User, Settings, LogOut } from 'lucide-react'
+import { ChevronDown, User, Settings, LogOut, ChevronRight } from 'lucide-react'
 import { SignOut } from './sign-out'
+import { ThemeToggle } from './theme-toggle'
 
 function SettingModal() {
   const [isOpen, setIsOpen] = useState(false)
-  const dropdownRef = useRef(null)
+  const [showSettings, setShowSettings] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: Event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false)
+        setShowSettings(false)
       }
     }
 
@@ -23,12 +26,24 @@ function SettingModal() {
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
+    if (!isOpen) {
+      setShowSettings(false)
+    }
   }
 
-  const handleOptionClick = (option : any) => {
-    console.log(`Clicked: ${option}`)
-    setIsOpen(false)
-    // Add your logic here for each option
+  const handleOptionClick = (option: string) => {
+    if (option === 'Settings') {
+      setShowSettings(!showSettings)
+    } else {
+      console.log(`Clicked: ${option}`)
+      setIsOpen(false)
+      setShowSettings(false)
+      // Add your logic here for each option
+    }
+  }
+
+  const handleBackToMain = () => {
+    setShowSettings(false)
   }
 
   return (
@@ -48,37 +63,58 @@ function SettingModal() {
 
       {/* Dropdown Modal */}
       {isOpen && (
-        <div className="absolute top-8 right-0 w-40 bg-neutral-900 rounded-lg shadow-lg border border-neutral-700 z-50 overflow-hidden">
+        <div className="absolute top-8 right-0 w-40  rounded-lg shadow-lg  bg-[#191919] border border-[#222222]  z-50 overflow-hidden">
           <div className="py-1">
-            {/* Profile Option */}
-            <button
-              onClick={() => handleOptionClick('Profile')}
-              className="w-full px-4 py-2 text-left text-white hover:bg-neutral-800 transition-colors flex items-center gap-3"
-            >
-              <User className="w-4 h-4" />
-              <span className="text-sm">Profile</span>
-            </button>
+            {!showSettings ? (
+              <>
+                {/* Profile Option */}
+                <button
+                  onClick={() => handleOptionClick('Profile')}
+                  className="w-full px-4 py-2 text-left text-white hover:bg-neutral-800 transition-colors flex items-center gap-3"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="text-sm">Profile</span>
+                </button>
 
-            {/* Settings Option */}
-            <button
-              onClick={() => handleOptionClick('Settings')}
-              className="w-full px-4 py-2 text-left text-white hover:bg-neutral-800 transition-colors flex items-center gap-3"
-            >
-              <Settings className="w-4 h-4" />
-              <span className="text-sm">Settings</span>
-            </button>
+                {/* Settings Option */}
+                <button
+                  onClick={() => handleOptionClick('Settings')}
+                  className="w-full px-4 py-2 text-left text-white hover:bg-neutral-800 transition-colors flex items-center gap-3"
+                >
+                  <Settings className="w-4 h-4" />
+                  <span className="text-sm">Settings</span>
+                  <ChevronRight className="w-3 h-3 ml-auto" />
+                </button>
 
-            {/* Divider */}
-            <div className="border-t border-neutral-700 "></div>
+                {/* Divider */}
+                <div className="border-t border-neutral-700"></div>
 
-            {/* Sign Out Option */}
-            <button
-              onClick={() => handleOptionClick('Sign Out')}
-              className="w-full  text-left text-red-400 hover:bg-neutral-800 transition-colors flex items-center gap-3"
-            >
-       
-              <SignOut/>
-            </button>
+                {/* Sign Out Option */}
+                <button
+                  onClick={() => handleOptionClick('Sign Out')}
+                  className="w-full text-left text-red-400 hover:bg-neutral-800 transition-colors flex items-center gap-3"
+                >
+                  <SignOut/>
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Back Button */}
+                <button
+                  onClick={handleBackToMain}
+                  className="w-full px-4 py-2 text-left text-white hover:bg-neutral-800 transition-colors flex items-center gap-3"
+                >
+                  <ChevronRight className="w-3 h-3 rotate-180" />
+                  <span className="text-sm">Back</span>
+                </button>
+
+                {/* Divider */}
+                <div className="border-t border-neutral-700"></div>
+
+                {/* Theme Toggle */}
+                <ThemeToggle />
+              </>
+            )}
           </div>
         </div>
       )}

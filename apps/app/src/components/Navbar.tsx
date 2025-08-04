@@ -10,10 +10,10 @@ async function Navbar() {
     const t = await getI18n();
   
   return (
-    <div className='flex   items-center justify-center w-full'> 
-    <nav className='flex fixed top-2 items-center justify-between max-w-4xl w-full'>
+    <div className='flex  items-center justify-center w-full'> 
+    <nav className='flex fixed top-1 rounded-full z-50 px-3 p-1 backdrop-blur-lg items-center justify-between max-w-4xl w-full'>
         <div>
-        <p className='text-zinc-400'>{t("welcome", { name: data?.user?.email })}</p>
+        <p className='dark:text-zinc-400 text-neutral-700'>{t("welcome", { name: data?.user?.email })}</p>
         </div>
         <div>
         <SettingModal/>

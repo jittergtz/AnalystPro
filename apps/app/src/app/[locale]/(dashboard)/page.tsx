@@ -14,7 +14,7 @@ export default async function Page() {
   const t = await getI18n();
 
   return (
-    <div className="min-h-screen w-screen flex flex-col  items-center bg-[#171717]">
+    <div className="min-h-screen w-screen flex flex-col  items-center dark:bg-[#171717] bg-[#d6d6d6]">
       <div className="max-w-5xl w-full flex flex-col justify-center items-center">
       <div className="mt-40 mb-10  " >
         <h1 className="">Analyst Pro</h1>

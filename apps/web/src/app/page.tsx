@@ -1,5 +1,6 @@
 import { AnimatedText } from "@/components/animated-text";
 import { CopyText } from "@/components/copy-text";
+import Details from "@/components/Details";
 import { Footer } from "@/components/footer";
 import Hero from "@/components/hero";
 import SectionOne from "@/components/section-1";
@@ -21,6 +22,7 @@ export default function Page() {
       <SectionOne/>
       <SectionWhite/>
       <SectionTwo/>
+      <Details/>
       <Pricing/>
     </div>
   );
