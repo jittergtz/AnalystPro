@@ -2,7 +2,7 @@ export function Footer() {
   return (
     <footer className="flex items-center justify-center text-xs w-full overflow-hidden flex-col space-y-6">
      <div className="flex flex-col gap-3 items-center justify-center">
-      <span className="tracking-tight text-[30px] text-white">Trusted By</span>
+      <span className="tracking-tight leading-10 text-[30px] text-white">Trusted By</span>
       <p className="text-zinc-500 tracking-tight">Analyst's at</p>
       </div>
 

@@ -3,6 +3,7 @@ import { SignOut } from './sign-out'
 import Image from 'next/image'
 import { getUser } from '@v1/supabase/queries';
 import { getI18n } from '@/locales/server';
+import SettingModal from './setting-modal';
 
 async function Navbar() {
     const { data } = await getUser();
@@ -15,7 +16,8 @@ async function Navbar() {
         <p className='text-zinc-400'>{t("welcome", { name: data?.user?.email })}</p>
         </div>
         <div>
-            <SignOut />
+        <SettingModal/>
+          
         </div>
         </nav>
     </div>

@@ -27,6 +27,11 @@
     "./tooltip": "./src/components/tooltip.tsx",
     "./dialog": "./src/components/dialog.tsx",
     "./ChartAreaLinear": "./src/components/area-chart.tsx",
+    "./BarChart": "./src/components/bar-chart.tsx",
+    "./PieChart": "./src/components/pie-chart.tsx",
+    "./RadarChart": "./src/components/radar-chart.tsx",
+    "./LineChart": "./src/components/line-chart.tsx",
+
     "./icons": "./src/components/icons.tsx",
     "./tailwind.config": "./tailwind.config.ts",
     "./postcss": "./postcss.config.js"

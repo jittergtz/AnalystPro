@@ -15,7 +15,7 @@ export function SignOut() {
     <Button
       onClick={handleSignOut}
       variant="outline"
-      className="font-mono rounded-full gap-2 flex items-center"
+      className=" border-none  gap-2 flex items-center"
     >
       <Icons.SignOut className="size-4" />
       <span>Sign out</span>

@@ -66,9 +66,9 @@ export function ChartAreaLinear() {
             <Area
               dataKey="desktop"
               type="linear"
-              fill="#fff"
+              fill="#3D74FF"
               fillOpacity={0.4}
-              stroke="#fff"
+              stroke="#A1BCFF"
             />
           </AreaChart>
         </ChartContainer>
