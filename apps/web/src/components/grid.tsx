@@ -278,17 +278,14 @@ function Grid() {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center bg-gradient-to-r from-neutral-900 to-zinc-800 rounded-lg p-12">
-          <h2 className="text-3xl font-bold mb-4">Ready to streamline your business?</h2>
-          <p className="text-neutral-300 mb-8 max-w-2xl mx-auto">
+        <div className="text-center bg-neutral-950 rounded-lg p-12">
+          <h2 className="text-3xl font-semibold mb-4">Ready to streamline your business?</h2>
+          <p className="text-neutral-400 mb-8 max-w-2xl mx-auto">
             Join thousands of businesses that trust our platform for their invoicing, document management, and accounting needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-2 bg-white text-black font-semibold rounded-full hover:bg-neutral-100 transition-colors">
+            <button className="px-8 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-100 transition-colors">
               Start Free Trial
-            </button>
-            <button className="px-8 py-2 border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-colors">
-              Watch Demo
             </button>
           </div>
         </div>
