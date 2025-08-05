@@ -2,6 +2,7 @@ import { AnimatedText } from "@/components/animated-text";
 import { CopyText } from "@/components/copy-text";
 import Details from "@/components/Details";
 import { Footer } from "@/components/footer";
+import Grid from "@/components/grid";
 import Hero from "@/components/hero";
 import SectionOne from "@/components/section-1";
 import SectionTwo from "@/components/section-2";
@@ -22,6 +23,7 @@ export default function Page() {
       <SectionOne/>
       <SectionWhite/>
       <SectionTwo/>
+      <Grid/>
       <Details/>
       <Pricing/>
     </div>
