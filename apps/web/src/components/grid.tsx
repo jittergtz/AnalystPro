@@ -71,7 +71,7 @@ function Grid() {
             <Zap size={16} className='text-white' />
             All-in-one Business Solution
           </div>
-          <h1 className="text-5xl font-semibold mb-6 bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-semibold mb-6  text-white">
             Streamline Your Business
             <br />
         
@@ -279,7 +279,7 @@ function Grid() {
 
         {/* CTA Section */}
         <div className="text-center bg-neutral-950 rounded-lg p-12">
-          <h2 className="text-3xl font-semibold mb-4">Ready to streamline your business?</h2>
+          <h2 className="text-3xl font-semibold mb-4 ">Ready to streamline your business?</h2>
           <p className="text-neutral-400 mb-8 max-w-2xl mx-auto">
             Join thousands of businesses that trust our platform for their invoicing, document management, and accounting needs.
           </p>
