@@ -46,7 +46,7 @@ function Pricing() {
             {/* Pricing Cards */}
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 px-5'>
               {/* Basic Plan */}
-              <div className='bg-[#1B1B1B] h-[450px] w-72 backdrop-blur-sm rounded-md p-5 flex flex-col justify-between  border border-[#424242]'>
+              <div className='bg-[#1B1B1B]  h-[500px] w-80 backdrop-blur-sm rounded-md p-5 flex flex-col justify-between  border border-[#424242]'>
                 <h3 className='text-xl text-white mb-2'>Analyst</h3>
                 <div className='mb-4 relative  flex flex-col items-center justify-center '>
                     <span className='absolute text-xl text-white top-4 left-16'>$</span>
@@ -73,7 +73,7 @@ function Pricing() {
               </div>
 
               {/* Pro Plan */}
-              <div className='bg-[#2a2a2a] flex flex-col justify-between  h-[450px] w-72 backdrop-blur-sm rounded-md p-5 border border-[#424242] relative'>
+              <div className='bg-[#2a2a2a] flex flex-col justify-between  h-[500px] w-80 backdrop-blur-sm rounded-md p-5 border border-[#424242] relative'>
            <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]"></div>
                 <div className='absolute -top-3 left-1/2 transform -translate-x-1/2'>
                   <span className='bg-zinc-200 text-black px-3 py-1 rounded-full text-xs font-medium'>
@@ -105,7 +105,7 @@ function Pricing() {
               </div>
 
               {/* Enterprise Plan */}
-              <div className='bg-[#161616] flex flex-col justify-between h-[450px] w-72 backdrop-blur-sm rounded-md p-5 border border-[#262626]'>
+              <div className='bg-[#161616] flex flex-col justify-between  h-[500px] w-80 backdrop-blur-sm rounded-md p-5 border border-[#262626]'>
                 <h3 className='text-xl  text-white mb-2'>Scale</h3>
                 <div className='mb-4'>
                   <span className='text-3xl font-medium text-white'>
