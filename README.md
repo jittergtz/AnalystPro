@@ -2,9 +2,9 @@
 
 
 <p align="center">
-	<h1 align="center"><b>Create v1</b></h1>
+	<h1 align="center"><b>Analyst Pro</b></h1>
 <p align="center">
-    An open-source starter kit based on <a href="https://midday.ai">Midday</a>.
+    An open-sourceEquity Research tool.
     <br />
     <br />
     <a href="https://v1.run"><strong>Website</strong></a> · 
