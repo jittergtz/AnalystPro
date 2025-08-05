@@ -1,4 +1,4 @@
-![hero](image.png)
+![hero](AnalystProImg.png)
 
 
 <p align="center">
