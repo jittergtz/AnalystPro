@@ -1,58 +1,65 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react'
-import { Building2, TrendingUp } from 'lucide-react'
+import { Building2, TrendingUp, Loader2 } from 'lucide-react'
+import { searchCompanies } from '@/actions/search-company-action'
 
-// Mock company data
-const mockCompanies = [
-  { id: 1, name: "NVIDIA Corporation", symbol: "NVDA", sector: "Technology" },
-  { id: 2, name: "Apple Inc.", symbol: "AAPL", sector: "Technology" },
-  { id: 3, name: "Microsoft Corporation", symbol: "MSFT", sector: "Technology" },
-  { id: 4, name: "Amazon.com Inc.", symbol: "AMZN", sector: "E-commerce" },
-  { id: 5, name: "Tesla Inc.", symbol: "TSLA", sector: "Automotive" },
-  { id: 6, name: "Alphabet Inc.", symbol: "GOOGL", sector: "Technology" },
-  { id: 7, name: "Meta Platforms Inc.", symbol: "META", sector: "Technology" },
-  { id: 8, name: "Netflix Inc.", symbol: "NFLX", sector: "Entertainment" },
-  { id: 9, name: "Advanced Micro Devices", symbol: "AMD", sector: "Technology" },
-  { id: 10, name: "Intel Corporation", symbol: "INTC", sector: "Technology" },
-  { id: 11, name: "Salesforce Inc.", symbol: "CRM", sector: "Technology" },
-  { id: 12, name: "Adobe Inc.", symbol: "ADBE", sector: "Technology" },
-  { id: 13, name: "PayPal Holdings", symbol: "PYPL", sector: "Financial Services" },
-  { id: 14, name: "Zoom Video Communications", symbol: "ZM", sector: "Technology" },
-  { id: 15, name: "Shopify Inc.", symbol: "SHOP", sector: "E-commerce" },
-  { id: 16, name: "Square Inc.", symbol: "SQ", sector: "Financial Services" },
-  { id: 17, name: "Twitter Inc.", symbol: "TWTR", sector: "Technology" },
-  { id: 18, name: "Uber Technologies", symbol: "UBER", sector: "Transportation" },
-  { id: 19, name: "Airbnb Inc.", symbol: "ABNB", sector: "Travel" },
-  { id: 20, name: "Coinbase Global", symbol: "COIN", sector: "Cryptocurrency" }
-]
+interface Company {
+  id: number
+  name: string
+  symbol: string
+  sector?: string
+  industry?: string
+  country?: string
+  currency?: string
+  exchange?: string
+  ipo?: string
+  marketCapitalization?: number
+  phone?: string
+  shareOutstanding?: number
+  weburl?: string
+  logo?: string
+  finnhubIndustry?: string
+}
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedCompany, setSelectedCompany] = useState(null)
-  const [filteredCompanies, setFilteredCompanies] = useState([])
-  const searchRef = useRef(null)
-  const inputRef = useRef(null)
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
+  const [filteredCompanies, setFilteredCompanies] = useState<Company[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const searchRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  // Filter companies based on search term
+  // Debounced search function
   useEffect(() => {
-    if (searchTerm.length > 0) {
-      const filtered = mockCompanies.filter(company => 
-        company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        company.symbol.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      setFilteredCompanies(filtered.slice(0, 8)) // Limit to 8 suggestions
-      setIsOpen(true)
-    } else {
-      setFilteredCompanies([])
-      setIsOpen(false)
-    }
+    const timeoutId = setTimeout(async () => {
+      if (searchTerm.length >= 2) {
+        setIsLoading(true)
+        setError(null)
+        try {
+          const companies = await searchCompanies(searchTerm)
+          setFilteredCompanies(companies)
+          setIsOpen(true)
+        } catch (err) {
+          setError('Failed to fetch companies')
+          setFilteredCompanies([])
+        } finally {
+          setIsLoading(false)
+        }
+      } else {
+        setFilteredCompanies([])
+        setIsOpen(false)
+      }
+    }, 300) // 300ms debounce
+
+    return () => clearTimeout(timeoutId)
   }, [searchTerm])
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
@@ -63,12 +70,12 @@ function Search() {
     }
   }, [])
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
     setSelectedCompany(null) // Clear selection when user types
   }
 
-  const handleCompanySelect = (company) => {
+  const handleCompanySelect = (company: Company) => {
     setSelectedCompany(company)
     setSearchTerm(company.name)
     setIsOpen(false)
@@ -76,7 +83,7 @@ function Search() {
   }
 
   const handleInputFocus = () => {
-    if (searchTerm.length > 0) {
+    if (searchTerm.length >= 2) {
       setIsOpen(true)
     }
   }
@@ -85,11 +92,14 @@ function Search() {
     setSearchTerm('')
     setSelectedCompany(null)
     setIsOpen(false)
+    setError(null)
     inputRef.current?.focus()
   }
 
-  const getSectorColor = (sector) => {
-    const colors = {
+  const getSectorColor = (sector?: string) => {
+    if (!sector) return 'text-gray-400'
+    
+    const colors: Record<string, string> = {
       'Technology': 'text-blue-400',
       'E-commerce': 'text-green-400',
       'Automotive': 'text-red-400',
@@ -97,7 +107,22 @@ function Search() {
       'Financial Services': 'text-yellow-400',
       'Transportation': 'text-orange-400',
       'Travel': 'text-pink-400',
-      'Cryptocurrency': 'text-amber-400'
+      'Cryptocurrency': 'text-amber-400',
+      'Healthcare': 'text-emerald-400',
+      'Energy': 'text-orange-500',
+      'Consumer Goods': 'text-indigo-400',
+      'Real Estate': 'text-teal-400',
+      'Utilities': 'text-cyan-400',
+      'Materials': 'text-lime-400',
+      'Industrials': 'text-slate-400',
+      'Communication Services': 'text-violet-400',
+      'Consumer Discretionary': 'text-rose-400',
+      'Consumer Staples': 'text-amber-500',
+      'Financial': 'text-yellow-400',
+      'Basic Materials': 'text-lime-400',
+      'Industrial Goods': 'text-slate-400',
+      'Services': 'text-purple-400',
+      'Unknown': 'text-gray-400'
     }
     return colors[sector] || 'text-gray-400'
   }
@@ -108,7 +133,9 @@ function Search() {
         {/* Search Input */}
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          
+            {isLoading && (
+              <Loader2 className="w-4 h-4 text-gray-400 animate-spin" />
+            )}
           </div>
           <input
             ref={inputRef}
@@ -117,7 +144,7 @@ function Search() {
             onChange={handleInputChange}
             onFocus={handleInputFocus}
             placeholder="Search companies or stocks..."
-            className="w-full px-3 pr-4 py-2 bg-neutral-900 border border-neutral-700 rounded-full text-white placeholder-zinc-400 "
+            className="w-full px-3 pr-4 py-2 bg-neutral-900 border border-neutral-700 rounded-full text-white placeholder-zinc-400"
           />
           {searchTerm && (
             <button
@@ -161,7 +188,7 @@ function Search() {
                           {company.name}
                         </div>
                         <div className={`text-xs ${getSectorColor(company.sector)}`}>
-                          {company.sector}
+                          {company.sector || 'Unknown'}
                         </div>
                       </div>
                     </div>
@@ -178,8 +205,30 @@ function Search() {
           </div>
         )}
 
+        {/* Loading State */}
+        {isOpen && isLoading && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-neutral-900 border border-neutral-700 rounded-lg shadow-lg z-50">
+            <div className="px-4 py-6 text-center text-gray-400">
+              <Loader2 className="w-6 h-6 mx-auto mb-2 animate-spin" />
+              <p>Searching companies...</p>
+              <p className="text-xs mt-1 text-gray-500">Fetching company details</p>
+            </div>
+          </div>
+        )}
+
+        {/* Error State */}
+        {isOpen && error && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-neutral-900 border border-neutral-700 rounded-lg shadow-lg z-50">
+            <div className="px-4 py-6 text-center text-gray-400">
+              <Building2 className="w-8 h-8 mx-auto mb-2 opacity-50" />
+              <p className="text-red-400">{error}</p>
+              <p className="text-sm mt-1">Please try again later</p>
+            </div>
+          </div>
+        )}
+
         {/* No Results */}
-        {isOpen && searchTerm.length > 0 && filteredCompanies.length === 0 && (
+        {isOpen && searchTerm.length >= 2 && !isLoading && !error && filteredCompanies.length === 0 && (
           <div className="absolute top-full left-0 right-0 mt-1 bg-neutral-900 border border-neutral-700 rounded-lg shadow-lg z-50">
             <div className="px-4 py-6 text-center text-gray-400">
               <Building2 className="w-8 h-8 mx-auto mb-2 opacity-50" />
