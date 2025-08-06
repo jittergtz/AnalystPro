@@ -96,12 +96,23 @@ export async function searchCompanies(query: string): Promise<Company[]> {
     
     // Transform Finnhub data to match our interface
     const companies = data.result
-      .filter(item => item.type === 'Common Stock' || item.type === 'ADR' || item.type === 'ETF')
-      .slice(0, 8) // Limit to 8 results early to avoid too many API calls
+      .sort((a, b) => {
+        // Prioritize common stock
+        if (a.type === 'Common Stock' && b.type !== 'Common Stock') return -1
+        if (a.type !== 'Common Stock' && b.type === 'Common Stock') return 1
+
+        // Prioritize US exchanges
+        const isUS_A = a.symbol.includes('.') === false
+        const isUS_B = b.symbol.includes('.') === false
+        if (isUS_A && !isUS_B) return -1
+        if (!isUS_A && isUS_B) return 1
+        
+        return 0
+      })
 
     // Fetch additional details for each company
     const companiesWithDetails = await Promise.all(
-      companies.map(async (item, index) => {
+      companies.slice(0, 8).map(async (item, index) => {
         const profile = await getCompanyProfile(item.symbol)
         
         return {
