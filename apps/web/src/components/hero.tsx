@@ -77,13 +77,13 @@ function Hero() {
             Professional Equity Research
           </motion.h3>
           <motion.div 
-            className='flex items-center gap-4 mt-12'
+            className='flex items-center gap-3 mt-12'
             variants={textVariants}
           >
-            <button className=' px-6 p-1 z-50 duration-200 hover:bg-neutral-600 hover:text-zinc-300 bg-neutral-700 text-zinc-400 rounded-full'>
+            <button className=' px-8 p-2 z-50 duration-200 hover:bg-neutral-600 hover:text-zinc-300 bg-neutral-700 text-zinc-400 rounded-full'>
               Research
             </button>
-            <button className=' px-10 p-1 z-50 duration-200 hover:bg-neutral-200 text-black bg-zinc-100 rounded-full'>
+            <button className=' px-12 p-2 z-50 duration-200 hover:bg-neutral-200 text-black bg-zinc-100 rounded-full'>
               Open App
             </button>
           </motion.div>
@@ -120,7 +120,7 @@ function Hero() {
 
         {/* Third Card (Front) */}
         <motion.div 
-          className='absolute h-[400px] top-72 right-2 z-0 overflow-hidden w-[600px] -rotate-12 shadow-[0_0_20px_1px_rgba(0,0,0,1)] shadow-[inset_0_0_70px_20px_rgba(0,0,0,1)] bg-gradient-to-t from-[#060606] from-[10%] to-[90%] to-[#151414] border-[2px] border-[#1f1f1f] rounded-xl flex justify-center items-center'
+          className='absolute h-[400px] top-72 right-2 z-0 overflow-hidden w-[600px] -rotate-12 shadow-[0_0_20px_1px_rgba(0,0,0,1)] shadow-[inset_0_0_70px_20px_rgba(0,0,0,1)] bg-gradient-to-t from-[#181818] from-[10%] to-[90%] to-[#1d1d1c] border-[2px] border-[#1f1f1f] rounded-xl flex justify-center items-center'
           variants={cardVariants}
           initial="hidden"
           animate="visible"

@@ -97,7 +97,7 @@ function Search() {
   }
 
   const getSectorColor = (sector?: string) => {
-    if (!sector) return 'text-gray-400'
+    if (!sector) return 'text-zinc-400'
     
     const colors: Record<string, string> = {
       'Technology': 'text-blue-400',
@@ -132,9 +132,9 @@ function Search() {
       <div className="relative" ref={searchRef}>
         {/* Search Input */}
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 right-3 pr-3 flex items-center pointer-events-none">
             {isLoading && (
-              <Loader2 className="w-4 h-4 text-gray-400 animate-spin" />
+              <Loader2 className="w-4 h-4 text-zinc-400 animate-spin" />
             )}
           </div>
           <input
@@ -143,8 +143,8 @@ function Search() {
             value={searchTerm}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
-            placeholder="Search companies or stocks..."
-            className="w-full px-3 pr-4 py-2 bg-neutral-900 border border-neutral-700 rounded-full text-white placeholder-zinc-400"
+            placeholder="Search companies or stocks"
+            className="w-full px-3 pr-4 py-2 bg-neutral-800  rounded-full text-white placeholder-zinc-400 outline-none"
           />
           {searchTerm && (
             <button
